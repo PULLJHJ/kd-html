@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        td {
+            width: 50px;
+            height: 50px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="bet">
+    <input type="text" id="bet2">
+    <input type="text" id="bet3">
+    <button onclick="startRoulette()">가자 일확천금!</button>
+    <table border="1">
+
+    </table>
+    <script>
+        let redIdx = -1;
+        let blueIdx = -1;
+        let greenIdx = -1;
+
+        function startRoulette(){
+            const tds = document.querySelectorAll('td');
+            const interval = setInterval(function(){
+                for(let i=0; i<tds.length; i++){
+                    tds[i].style = 'background-color:white';
+                }
+                redIdx = Math.floor(Math.random() * tds.length);
+                tds[redIdx].style = 'background-color:red';
+
+                blueIdx = Math.floor(Math.random() * tds.length);
+                tds[blueIdx].style = 'background-color:blue';
+
+                greenIdx = Math.floor(Math.random() * tds.length);
+                tds[greenIdx].style = 'background-color:green';
+                
+            }, 200);
+
+            setTimeout(function(){  
+                clearInterval(interval);
+
+                let i = parseInt(document.getElementById('bet').value);
+                let j= parseInt(document.getElementById('bet2').value);
+                let k = parseInt(document.getElementById('bet3').value);
+                if(i === redIdx || j === blueIdx || k === greenIdx){
+                    alert('당첨!');
+                }else{
+                    alert('꽝!');
+                }
+            }, 3000);
+        }
+
+        let html = '';
+        let cnt = 1;
+        for(let i = 1; i <= 5; i++){
+            html += '<tr>';
+            for(let j = 1; j <= 10; j++){
+                html += '<td>' + (cnt++) + '</td>';
+            }
+            html += '</tr>';
+        }
+        document.querySelector('table').innerHTML = html;
+    </script>
+</body>
+</html>
